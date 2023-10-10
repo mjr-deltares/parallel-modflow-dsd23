@@ -22,7 +22,7 @@ If you are on a networked computer behind a firewall, you may need to take addit
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod +x Miniconda3-latest-Linux-x86_64.sh
 ./Miniconda3-latest-Linux-x86_64.sh -b
-eval "$(/home/<uername>/miniconda3/bin/conda shell.bash hook)"
+eval "$(/home/<username>/miniconda3/bin/conda shell.bash hook)"
 conda init
 exit
 ```

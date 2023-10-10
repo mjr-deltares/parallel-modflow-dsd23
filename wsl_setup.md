@@ -1,5 +1,3 @@
-<img src="./images/supercomputer.png" alt="Parallel MODFLOW Course" style="width:50;height:20">
-
 # WSL and Parallel MODFLOW
 
 Instructions are provided here for setting up Ubuntu on the Windows Subsystem for Linux (WSL) to work with MODFLOW.

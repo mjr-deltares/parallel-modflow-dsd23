@@ -12,62 +12,38 @@ Install a latest version of Ubuntu.
 
 You will be asked to provide a username and password.  You'll need to remember this information for some future `sudo` operations.
 
-## Firewall Considerations
+## Clone the class repo
 
-If you are on a networked computer behind a firewall, you may need to take additional steps at this point to configure WSL to handle SSL intercept requirements.  If your computer is on the USGS internal network, or needs to be, then there are a specific set of instructions that must be run before continuing.  These instructions are located in a file called `usgs_wsl_security.txt`.
-
-## Installing Miniconda
+Clone the class repo in your WSL Ubuntu virtual machine after opening a WSL terminal using
 
 ```
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-chmod +x Miniconda3-latest-Linux-x86_64.sh
-./Miniconda3-latest-Linux-x86_64.sh -b
-eval "$(/home/<username>/miniconda3/bin/conda shell.bash hook)"
-conda init
-exit
+git clone https://github.com/mjr-deltares/parallel-modflow-dsd23.git
 ```
 
-The `exit` command will close the Ubuntu shell.  At this point, you will need to restart the shell, which you can typically find through the Windows Start button, to allow the miniconda installation to complete.
+## Installing the class `mf6xtd` conda environment
 
-## Cloning MODFLOW Resources from GitHub
-The next step is to clone the GitHub repositories for MODFLOW 6 and the MODFLOW 6 parallel class.
+Open the WLS terminal and navigate to the `/parallel-modflow-dsd23/installation` directory. 
 
-```
-git clone https://github.com/jdhughes-usgs/parallel-modflow6-class.git
-git clone https://github.com/MODFLOW-USGS/modflow6.git
-```
+### Clean WSL Ubuntu virtual environment, Linux, or MacOS
 
-## Installing the `mf6pro` Conda Environment
-Next, you will create a conda environment, called `mf6pro`, that will be used for thie class.  The `mf6pro` environment will have all of the software needed to compile serial and parallel versions of MODFLOW 6, and the Python packages needed to pre- and post-process MODFLOW models.
-
-The steps for creating the `mf6pro` conda environment are as follows
+If you installing the class conda environment in a WSL Ubuntu virtual environment, Linux machine, or MacOS machine without a Conda or Miniconda installation, the environment can be installed using
 
 ```
-conda env create -f ./parallel-modflow6-class/environment/flopy_environment.yml -f ./parallel-modflow6-class/environment/mf6_environment.yml
+./parallel_class_environment_setup.sh
 ```
 
-In order to run jupyter notebooks, it will also be necessary to install jupyter.  Activate the `mf6pro` conda environment and then install jupyter from the conda-forge channel, as shown with the following commands.
+This will install Miniconda, install the class `mf6xtd` conda environment, compile parallel MODFLOW 6, test parallel MODFLOW 6, and test the environment installation.
+
+### WSL Ubuntu virtual environment, Linux, or MacOS
+
+If you installing the class `mf6xtd` conda environment in a WSL Ubuntu virtual environment, Linux machine, or MacOS machine with an an existing Conda or Miniconda installation, the environment can be installed using
 
 ```
-conda activate mf6pro
-conda install -c conda-forge jupyter jupyterlab
+./parallel_class_environment_setup.sh --skip-conda
 ```
 
-Note that you may have to type Y to continue the conda install of jupyter packages.
+This will install the class `mf6xtd` conda environment, compile parallel MODFLOW 6, test parallel MODFLOW 6, and test the environment installation. This step can also be run to update an existing class `mf6xtd`environment on a WSL Ubuntu virtual environment, Linux machine, or MacOS machine.
 
-## Building MODFLOW
+### Successful installation of the class `mf6xtd` conda environment
 
-```
-cd modflow6
-meson setup builddir -Ddebug=false -Dparallel=true --prefix=$(pwd) --libdir=bin
-meson install -C builddir
-meson test --verbose --no-rebuild -C builddir
-```
-
-If everything is working properly, then the last command should show that the tests completed ok and without errors.
-
-To make this new MODFLOW 6 executable available for future simulations, add a symbolic link to the newly compiled version of mf6 (./bin/mf6) from the mf6pro bin folder (~/miniconda3/envs/mf6pro/bin).
-
-```
-ln ./bin/mf6 ~/miniconda3/envs/mf6pro/bin/mf6
-```
+If the class `mf6xtd` conda environment has been successfully installed, `Successful testing of miniconda environment and MODFLOW 6` will be written to the terminal. The message `Successful testing of miniconda environment and MODFLOW 6`, will also be written to the last line of the `/parallel-modflow-dsd23/installation\installation.log` file if the class `mf6xtd` conda environment has been successfully installed. The `installation.log` file will also include additional information written during the class `mf6xtd` conda environment installation.

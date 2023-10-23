@@ -23,7 +23,8 @@ for name in sim.model_names:
         )
 
 sim.write_simulation()
-sim.run_simulation(processors=nprocessors)
+success, buff = sim.run_simulation(processors=nprocessors)
+assert success, "base parallel model did not run"
 
 # create base_hds array
 base_hds = np.zeros((1,1,10), dtype=float)
@@ -46,7 +47,8 @@ chd = flopy.mf6.ModflowGwfchd(gwf, stress_period_data=[(0, 0, 0, 1.0), (0, 0, 9,
 oc =  flopy.mf6.ModflowGwfoc(gwf, head_filerecord=f"{name}.hds", saverecord=[("head", "all")])
 
 sim_base.write_simulation()
-sim_base.run_simulation()
+success, buff = sim_base.run_simulation()
+assert success, "single domain model did not run"
 
 # evaluate if single and base_hds are equal
 success = np.allclose(gwf.output.head().get_data(), base_hds)
@@ -60,7 +62,8 @@ new_sim = mfsplit.split_model(split_array)
 new_sim.set_sim_path(ws_parallel)
 
 new_sim.write_simulation()
-new_sim.run_simulation(processors=nprocessors)
+success, buff = new_sim.run_simulation(processors=nprocessors)
+assert success, "split domain model did not run"
 
 # construct a single head array from models
 model_names = list(new_sim.model_names)

@@ -11,6 +11,14 @@ if [ "${OS_NAME}" = Darwin ]; then
 else
 	MINICONDA_VERSION="Miniconda3-latest-${OS_NAME}-${ARCH}.sh"
 fi
+if [ "${SHELL}" = /bin/zsh ]; then
+	CONDA_SHELL=zsh
+	CONDA_SHELLRC="${HOME}/.zshrc"
+
+else
+	CONDA_SHELL=bash
+	CONDA_SHELLRC="${HOME}/.bashrc"
+fi
 MINICONDA_DIR=$HOME/miniconda3
 MINICONDA_ENV=mf6xtd
 INITIAL_DIR=$(pwd)
@@ -21,6 +29,8 @@ LOG_FILE=$INITIAL_DIR/installation.log
 # remove existing log file
 rm -rf "${LOG_FILE}"
 echo "${REPO_NAME} Installation log" > $LOG_FILE
+echo "SHELL: ${CONDA_SHELL}" >> $LOG_FILE
+echo "SHELL RC FILE: ${CONDA_SHELLRC}" >> $LOG_FILE
 
 if [ -z "$1" ]; then
 	CONDA_OPTION=true
@@ -41,20 +51,28 @@ if [ "${CONDA_OPTION}" = true ]; then
 
 	# get miniconda
 	echo "Getting miniconda (${MINICONDA_VERSION})" >> $LOG_FILE
-	wget "https://repo.anaconda.com/miniconda/${MINICONDA_VERSION}"
+        if [ "${OS_NAME}" = Darwin ]; then
+		curl -O "https://repo.anaconda.com/miniconda/${MINICONDA_VERSION}"
+	else
+		wget "https://repo.anaconda.com/miniconda/${MINICONDA_VERSION}"
+	fi
 	chmod +x $MINICONDA_VERSION
 
 	echo "Installing miniconda" >> $LOG_FILE
 	./$MINICONDA_VERSION -b 
-	eval "$(/home/$USER/miniconda3/bin/conda shell.bash hook)"
-	conda init bash
+  if [ "${OS_NAME}" = Darwin ]; then
+	  eval "$(${HOME}/miniconda3/bin/conda shell.${CONDA_SHELL} hook)"
+  else
+    eval "$(/home/$USER/miniconda3/bin/conda shell.${CONDA_SHELL} hook)"
+  fi
+	conda init "${CONDA_SHELL}"
 
 	# clean up miniconda installation script
 	rm -rf "${MINICONDA_VERSION}"
 fi
 
 source "${MINICONDA_DIR}/etc/profile.d/conda.sh"
-source "${HOME}/.bashrc"
+source "${CONDA_SHELLRC}"
 
 if conda info --envs | grep -q $MINICONDA_ENV; then
 	echo "Updating existing ${MINICONDA_ENV} environment" >> $LOG_FILE 

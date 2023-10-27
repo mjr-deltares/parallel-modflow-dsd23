@@ -20,30 +20,18 @@ Clone the class repo in your WSL Ubuntu virtual machine after opening a WSL term
 git clone https://github.com/mjr-deltares/parallel-modflow-dsd23.git
 ```
 
-## Installing the class `mf6xtd` conda environment
+## Setting up parallel MODFLOW 6 and pixi environment
 
-Open the WLS terminal and navigate to the `/parallel-modflow-dsd23/installation` directory. 
-
-### Clean WSL Ubuntu virtual environment, Linux, or MacOS
-
-If you installing the class conda environment in a WSL Ubuntu virtual environment, Linux machine, or MacOS machine without a Conda or Miniconda installation, the environment can be installed using
+In order to setting up you system execute:
 
 ```
-./parallel_class_environment_setup.sh
+./pixi run install
 ```
 
-This will install Miniconda, install the class `mf6xtd` conda environment, compile parallel MODFLOW 6, test parallel MODFLOW 6, and test the environment installation.
+## Jupyter
 
-### WSL Ubuntu virtual environment, Linux, or MacOS
-
-If you installing the class `mf6xtd` conda environment in a WSL Ubuntu virtual environment, Linux machine, or MacOS machine with an an existing Conda or Miniconda installation, the environment can be installed using
+Jupyter Lab can be started by executing:
 
 ```
-./parallel_class_environment_setup.sh --skip-conda
+./pixi run jupyter
 ```
-
-This will install the class `mf6xtd` conda environment, compile parallel MODFLOW 6, test parallel MODFLOW 6, and test the environment installation. This step can also be run to update an existing class `mf6xtd`environment on a WSL Ubuntu virtual environment, Linux machine, or MacOS machine.
-
-### Successful installation of the class `mf6xtd` conda environment
-
-If the class `mf6xtd` conda environment has been successfully installed, `Successful testing of miniconda environment and MODFLOW 6` will be written to the terminal. The message `Successful testing of miniconda environment and MODFLOW 6`, will also be written to the last line of the `/parallel-modflow-dsd23/installation\installation.log` file if the class `mf6xtd` conda environment has been successfully installed. The `installation.log` file will also include additional information written during the class `mf6xtd` conda environment installation.

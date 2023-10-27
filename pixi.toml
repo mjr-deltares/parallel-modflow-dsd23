@@ -1,0 +1,49 @@
+[project]
+name = "mf6xtd"
+
+[tasks]
+clone-modflow6="rm -rf modflow6/ && git clone https://github.com/MODFLOW-USGS/modflow6.git"
+setup-modflow6="cd modflow6 && meson setup builddir -Ddebug=false -Dparallel=true --prefix=$(pwd) --libdir=bin --wipe"
+install-modflow6="cd modflow6 && meson install -C builddir"
+test-modflow6="cd modflow6 && meson test --verbose --no-rebuild -C builddir"
+#symlink="ln -f ./bin/mf6 .pixi/env/"
+
+
+[dependencies]
+# required 
+python="<=3.11"
+numpy=">=1.15.0"
+matplotlib=">=1.4.0"
+jupyterlab="*"
+
+# development
+pkg-config="*"
+openmpi="*"
+gfortran="*"
+petsc="*"
+meson=">=1.1.0"
+ninja="*"
+
+# flopy
+python-dateutil=">=2.4.0"
+affine="*"
+scipy="*"
+pandas="*"
+pyshp="*"
+rasterio="*"
+fiona="*"
+descartes="*"
+pyproj="*"
+shapely=">=1.8"
+geos="*"
+geojson="*"
+vtk="*"
+rasterstats="*"
+pyvista="*"
+imageio="*"
+pymetis="*"
+netcdf4="*"
+xarray="*"
+flopy="*"
+xmipy="*"
+modflowapi="*"

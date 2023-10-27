@@ -22,7 +22,7 @@ git clone https://github.com/mjr-deltares/parallel-modflow-dsd23.git
 
 ## Setting up parallel MODFLOW 6 and pixi environment
 
-In order to setting up you system execute:
+In order to set up parallel MODFLOW 6,  execute:
 
 ```
 ./pixi run install

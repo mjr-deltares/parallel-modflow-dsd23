@@ -7,7 +7,7 @@ from flopy.mf6.utils import Mf6Splitter
 nprocessors = 2
 
 # load the base parallel model in MODFLOW 6 repo
-ws = pl.Path("../../modflow6/.mf6minsim/")
+ws = pl.Path("../modflow6/.mf6minsim/")
 sim = flopy.mf6.MFSimulation.load(sim_ws=ws)
 
 new_ws = pl.Path("temp/original")
@@ -80,6 +80,3 @@ assert success, "base_hds and split_hds do not match"
 
 msg = "Successful testing of miniconda environment and MODFLOW 6"
 print(msg)
-with open("installation.log", "a") as f:
-    f.write(f"{msg}\n")
-

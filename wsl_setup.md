@@ -25,6 +25,7 @@ git clone https://github.com/mjr-deltares/parallel-modflow-dsd23.git
 In order to set up parallel MODFLOW 6,  execute:
 
 ```
+cd parallel-modflow-dsd23
 ./pixi run install
 ```
 

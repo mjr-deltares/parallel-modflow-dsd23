@@ -2,7 +2,7 @@
 name = "mf6xtd"
 version = "1.0.0"
 channels = ["conda-forge"]
-platforms = ["linux-64", "linux-aarch64", "osx-arm64"]
+platforms = ["linux-64", "linux-aarch64", "osx-64", "osx-arm64"]
 
 [system-requirements]
 linux = "4.4.0"
@@ -18,11 +18,11 @@ clone-triangle = "rm -rf triangle/ && git clone https://github.com/MODFLOW-USGS/
 install-triangle = "cd triangle/src/ && gcc triangle.c -O2 -DNO_TIMER -o triangle -lm && cd ../../ && ln -f triangle/src/triangle .pixi/env/bin/triangle"
 test-triangle = "which triangle"
 install = { depends_on = [
-    "clone-modflow6",
-    "setup-modflow6",
-    "install-modflow6",
-    "test-modflow6",
-    "symlink",
+  "clone-modflow6",
+  "setup-modflow6",
+  "install-modflow6",
+  "test-modflow6",
+  "symlink",
 	"clone-triangle",
 	"install-triangle",
 	"test-triangle",
@@ -32,7 +32,7 @@ jupyter = "jupyter lab"
 
 
 [dependencies]
-# required 
+# required
 python = "<=3.11"
 numpy = ">=1.15.0"
 matplotlib = ">=1.4.0"

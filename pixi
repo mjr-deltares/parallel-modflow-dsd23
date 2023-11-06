@@ -7,7 +7,18 @@ arch=$(uname -m)
 # Run the appropriate executable based on the OS
 case "$os" in
   "Darwin")
-    ./binaries/pixi-"$arch"-apple-darwin "$@"
+    case "$arch" in
+      "arm64")
+        ./binaries/pixi-aarch64-apple-darwin "$@"
+        ;;
+      "x86_64")
+        ./binaries/pixi-x86_64-apple-darwin "$@"
+        ;;
+      *)
+        echo "Unsupported Darwin architecture: $arch"
+        exit 1
+        ;;
+    esac
     ;;
   "Linux")
     ./binaries/pixi-"$arch"-unknown-linux-musl "$@"

@@ -2,14 +2,15 @@
 
 # Determine the current operating system
 os=$(uname -s)
+arch=$(uname -m)
 
 # Run the appropriate executable based on the OS
 case "$os" in
   "Darwin")
-    ./binaries/pixi-aarch64-apple-darwin "$@"
+    ./binaries/pixi-"$arch"-apple-darwin "$@"
     ;;
   "Linux")
-    ./binaries/pixi-x86_64-unknown-linux-musl "$@"
+    ./binaries/pixi-"$arch"-unknown-linux-musl "$@"
     ;;
   *)
     echo "Unsupported OS: $os"

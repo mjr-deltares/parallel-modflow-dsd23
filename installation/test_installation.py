@@ -78,5 +78,5 @@ split_hds = mfsplit.reconstruct_array(head_dict)
 success = np.allclose(base_hds, split_hds)
 assert success, "base_hds and split_hds do not match"
 
-msg = "Successful testing of miniconda environment and MODFLOW 6"
+msg = "Successful testing of pixi environment and MODFLOW 6"
 print(msg)

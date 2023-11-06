@@ -2,10 +2,10 @@
 name = "mf6xtd"
 version = "1.0.0"
 channels = ["conda-forge"]
-platforms = ["linux-64", "osx-arm64"]
+platforms = ["linux-64", "linux-aarch64", "osx-arm64"]
 
 [system-requirements]
-linux = "5.4.72"
+linux = "4.4.0"
 
 [tasks]
 clone-modflow6 = "rm -rf modflow6/ && git clone https://github.com/MODFLOW-USGS/modflow6.git"
@@ -14,12 +14,18 @@ install-modflow6 = "cd modflow6 && meson install -C builddir"
 test-modflow6 = "cd modflow6 && meson test --verbose --no-rebuild -C builddir"
 symlink = "ln -f modflow6/bin/mf6 .pixi/env/bin/mf6"
 test-installation = "cd installation && python test_installation.py"
+clone-triangle = "rm -rf triangle/ && git clone https://github.com/MODFLOW-USGS/triangle.git"
+install-triangle = "cd triangle/src/ && gcc triangle.c -O2 -DNO_TIMER -o triangle -lm && cd ../../ && ln -f triangle/src/triangle .pixi/env/bin/triangle"
+test-triangle = "which triangle"
 install = { depends_on = [
     "clone-modflow6",
     "setup-modflow6",
     "install-modflow6",
     "test-modflow6",
     "symlink",
+	"clone-triangle",
+	"install-triangle",
+	"test-triangle",
     "test-installation",
 ] }
 jupyter = "jupyter lab"

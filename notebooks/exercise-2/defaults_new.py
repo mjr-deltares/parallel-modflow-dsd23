@@ -480,32 +480,3 @@ def get_model_cell_count(
         )
 
     return ncells, nactive
-
-
-def get_simulation_cell_count(
-    simulation: flopy.mf6.MFSimulation,
-) -> Tuple[int, int]:
-    """
-    Get the total number of cells and number of active cells in a simulation.
-
-    Parameters
-    ----------
-    simulation: flopy.mf6.MFSimulation
-        flopy mf6 simulation object
-
-    Returns
-    -------
-    ncells: int
-        Total number of cells in a simulation
-    nactive: int
-        Total number of active cells in a simulation
-    """
-    ncells = 0
-    nactive = 0
-    for model_name in simulation.model_names:
-        model = simulation.get_model(model_name)
-        i, j = get_model_cell_count(model)
-        ncells += i
-        nactive += j
-
-    return ncells, nactive

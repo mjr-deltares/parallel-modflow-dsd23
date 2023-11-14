@@ -392,50 +392,6 @@ def build_drain_data(
     return drn_data
 
 
-def build_groundwater_discharge_data(
-    modelgrid: Union[
-        flopy.discretization.StructuredGrid, flopy.discretization.VertexGrid
-    ],
-    leakance: float,
-    elevation: np.ndarray,
-) -> List[tuple]:
-    """
-    Build drain package data represent river segments
-
-    Parameters
-    ----------
-    modelgrid: flopy.discretization.StructuredGrid
-        flopy modelgrid object
-    leakance: float
-        drainage leakance value
-    elevation: numpy.ndarray
-        land surface elevation
-
-    Returns
-    -------
-    drn_data: list of tuples
-        Drain package data for stream segments
-    """
-    areas = cell_areas(modelgrid)
-    drn_data = []
-    idomain = modelgrid.idomain[0]
-    for idx in range(modelgrid.ncpl):
-        if modelgrid.grid_type == "structured":
-            r, c = modelgrid.get_lrc(idx)[0][1:]
-            cellid = (r, c)
-        else:
-            cellid = idx
-        area = areas[cellid]
-        if idomain[cellid] == 1:
-            conductance = leakance * area
-            if not isinstance(cellid, tuple):
-                cellid = (cellid,)
-            drn_data.append(
-                (0, *cellid, elevation[cellid] - 0.5, conductance, 1.0)
-            )
-    return drn_data
-
-
 def get_model_cell_count(
     model: Union[
         flopy.mf6.ModflowGwf,

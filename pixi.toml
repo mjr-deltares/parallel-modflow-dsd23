@@ -8,6 +8,7 @@ platforms = ["linux-64", "linux-aarch64", "osx-64", "osx-arm64"]
 linux = "4.4.0"
 
 [tasks]
+initialize = "export PKG_CONFIG_PATH="
 clone-modflow6 = "rm -rf modflow6/ && git clone https://github.com/MODFLOW-USGS/modflow6.git"
 setup-modflow6 = "cd modflow6 && meson setup builddir -Ddebug=false -Dparallel=true --prefix=$(pwd) --libdir=bin --wipe"
 install-modflow6 = "cd modflow6 && meson install -C builddir"
@@ -18,6 +19,7 @@ clone-triangle = "rm -rf triangle/ && git clone https://github.com/MODFLOW-USGS/
 install-triangle = "cd triangle/src/ && gcc triangle.c -O2 -DNO_TIMER -o triangle -lm && cd ../../ && ln -f triangle/src/triangle .pixi/env/bin/triangle"
 test-triangle = "which triangle"
 install = { depends_on = [
+  "initialize",
   "clone-modflow6",
   "setup-modflow6",
   "install-modflow6",
@@ -28,7 +30,7 @@ install = { depends_on = [
 	"test-triangle",
     "test-installation",
 ] }
-jupyter = "jupyter lab"
+jupyter = "export PKG_CONFIG_PATH= && jupyter lab"
 
 
 [dependencies]

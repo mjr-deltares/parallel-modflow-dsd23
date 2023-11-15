@@ -233,6 +233,30 @@ def get_all_workspaces() -> dict[int,os.PathLike]:
     return dict_ws
 
 
+def get_simulation_listfiles(path: os.PathLike) -> list:
+    """
+    Get all simulation list files in a path
+
+    Parameters
+    ----------
+    path: PathLike
+        path to simulation data
+
+    Returns
+    -------
+    list_files: list
+        list containing all listing files matching mfsim*.lst pattern
+
+    """
+    if isinstance(path, str):
+        path = pl.Path(path)
+
+    list_files = []
+    for file in path.glob("mfsim*.lst"):
+        list_files.append(path / file.name)
+    return list_files
+
+
 def string2geom(
     geostring: str,
     conversion: float = None,

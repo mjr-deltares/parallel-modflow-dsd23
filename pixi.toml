@@ -9,6 +9,7 @@ linux = "4.4.0"
 
 [tasks]
 initialize = "export PKG_CONFIG_PATH="
+update-flopy = "pip install https://github.com/modflowpy/flopy/zipball/develop"
 clone-modflow6 = "rm -rf modflow6/ && git clone https://github.com/MODFLOW-USGS/modflow6.git"
 setup-modflow6 = "cd modflow6 && meson setup builddir -Ddebug=false -Dparallel=true --prefix=$(pwd) --libdir=bin --wipe"
 install-modflow6 = "cd modflow6 && meson install -C builddir"
@@ -39,6 +40,7 @@ python = "<=3.11"
 numpy = ">=1.15.0"
 matplotlib = ">=1.4.0"
 jupyterlab = "*"
+pip = "*"
 
 # development
 pkg-config = "*"

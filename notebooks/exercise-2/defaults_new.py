@@ -1,6 +1,7 @@
 import os
 import pathlib as pl
 from typing import List, Tuple, Union
+import re
 
 import flopy
 import numpy as np
@@ -11,6 +12,9 @@ from shapely.geometry import LineString, Polygon
 # domain information
 Lx = 180000
 Ly = 100000
+
+example_dir = "../../examples/ex-basin"
+model_name = "basin"
 
 # Geometry data: vertices defining basin boundary and river segments
 geometry = {
@@ -148,13 +152,24 @@ geometry = {
 8.369565217391305487e+04 7.962732919254660374e+04""",
 }
 
+def get_workspace_dir() -> os.PathLike:
+    """
+    Get the path to folder with workspaces.
 
-def get_base_workspace() -> os.PathLike:
+    Returns
+    -------
+    base_ws: PathLike
+        path to folder with workspaces.
+
+    """
+    base_ws = pl.Path(example_dir)
+
+    return base_ws
+
+
+def get_serial_workspace() -> os.PathLike:
     """
     Get the base workspace for the simulation.
-
-    Parameters
-    ----------
 
     Returns
     -------
@@ -162,9 +177,9 @@ def get_base_workspace() -> os.PathLike:
         path to unique workspace for the base simulation.
 
     """
-    base_ws = get_workspace(1)
+    serial_ws = get_workspace(1)
 
-    return base_ws
+    return serial_ws
 
 
 def get_workspace(nr_domains: int) -> os.PathLike:
@@ -182,9 +197,40 @@ def get_workspace(nr_domains: int) -> os.PathLike:
         path to unique workspace for the parallel simulation.
 
     """
-    par_ws = pl.Path(f"../../examples/ex-basin/basin_{nr_domains:03}p")
+    par_ws = pl.Path(example_dir, f"{model_name}_{nr_domains:03}p")
 
     return par_ws
+
+
+def get_all_workspaces() -> dict[int,os.PathLike]:
+    """
+    Get all available workspaces from the examples directory.
+
+    Returns
+    -------
+    dict_ws: dict[int, PathLike]
+        a dictionary with number of domains (key) 
+        and path to workspace (value)
+
+    """
+    dict_ws = {}
+    
+    base_path = get_workspace_dir()
+    dirs = os.listdir(base_path)
+    dirs.sort()
+    paths = [os.path.join(base_path, d) for d in dirs]
+
+    pattern = r'basin_(\d\d\d)p'
+    for path in paths:
+        # match the pattern
+        matches = re.findall(pattern, path)
+        if len(matches) == 0:
+            continue
+        
+        ndomains = int(matches[0])
+        dict_ws[ndomains] = pl.Path(path)
+
+    return dict_ws
 
 
 def string2geom(

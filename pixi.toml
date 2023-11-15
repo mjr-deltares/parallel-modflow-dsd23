@@ -29,9 +29,9 @@ install = { depends_on = [
 	"clone-triangle",
 	"install-triangle",
 	"test-triangle",
-    "test-installation",
+  "test-installation",
 ] }
-jupyter = "export PKG_CONFIG_PATH= && jupyter lab"
+jupyter = "export PATH=.pixi/env/bin:$PATH && export PKG_CONFIG_PATH= && jupyter lab"
 
 
 [dependencies]

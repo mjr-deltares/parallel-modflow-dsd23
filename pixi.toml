@@ -17,7 +17,7 @@ test-modflow6 = "cd modflow6 && meson test --verbose --no-rebuild -C builddir"
 symlink = "ln -f modflow6/bin/mf6 .pixi/env/bin/mf6"
 test-installation = "cd installation && python test_installation.py"
 clone-triangle = "rm -rf triangle/ && git clone https://github.com/MODFLOW-USGS/triangle.git"
-install-triangle = "cd triangle/src/ && gcc triangle.c -O2 -DNO_TIMER -o triangle -lm && cd ../../ && ln -f triangle/src/triangle .pixi/env/bin/triangle"
+install-triangle = "cd triangle/src/ && gcc triangle.c -O1 -DNO_TIMER -o triangle -lm && cd ../../ && ln -f triangle/src/triangle .pixi/env/bin/triangle"
 test-triangle = "which triangle"
 install = { depends_on = [
   "initialize",

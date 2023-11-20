@@ -13,7 +13,7 @@ from shapely.geometry import LineString, Polygon
 Lx = 180000
 Ly = 100000
 
-example_dir = "../../examples/ex-basin"
+example_dir = "./working"
 model_name = "basin"
 
 # Geometry data: vertices defining basin boundary and river segments

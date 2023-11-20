@@ -10,15 +10,15 @@ If you are using the MacOS or Linux operating system you can follow the instruct
 
 # Agenda
 * Welcome and Introductions
-* Overview of MODFLOW 6
-* Concepts of parallel computing
-* Flopy for pre- and post-processing
-* == BREAK ==
-* Hands-on exercise: multi-model simulations and partitioning
+* Overview of MODFLOW 6 and FloPy
+* Hands-on exercise I: setup a FloPy model and run
+* == BREAK
+* Hands-on exercise I: postprocess and partition a model
+* Hands-on exercise I: running parallel MODFLOW 6
 * == LUNCH ==
-* Parallel MODFLOW 6: design and applications
-* Hands-on exercise: running parallel MODFLOW 6
+* Parallel MODFLOW 6: context and applications
+* Hands-on exercise II: build and partition the watershed
 * == BREAK ==
-* Hands-on exercise: evaluating parallel performance
+* Hands-on exercise II: validate results and parallel performance
 * (Hands-on alternative: run your own model in parallel)
 * Discussion and Wrap up

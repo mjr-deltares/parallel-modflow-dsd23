@@ -13,8 +13,8 @@ from shapely.geometry import LineString, Polygon
 Lx = 180000
 Ly = 100000
 
-example_dir = "./working"
-model_name = "basin"
+_example_dir = "./working"
+_model_name = "basin"
 
 # Geometry data: vertices defining basin boundary and river segments
 geometry = {
@@ -162,7 +162,7 @@ def get_workspace_dir() -> os.PathLike:
         path to folder with workspaces.
 
     """
-    base_ws = pl.Path(example_dir)
+    base_ws = pl.Path(_example_dir)
 
     return base_ws
 
@@ -197,7 +197,7 @@ def get_workspace(nr_domains: int) -> os.PathLike:
         path to unique workspace for the parallel simulation.
 
     """
-    par_ws = pl.Path(example_dir, f"{model_name}_{nr_domains:03}p")
+    par_ws = pl.Path(_example_dir, f"{_model_name}_{nr_domains:03}p")
 
     return par_ws
 

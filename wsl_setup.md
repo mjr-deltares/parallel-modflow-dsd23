@@ -42,7 +42,7 @@ cd parallel-modflow-dsd23
 ./pixi run install
 ```
 
-This will take a bit of time, somewhere in between 30 minutes and an hour. A successful installation sequence concludes with the message:
+This will take a bit of time, somewhere in between 15 minutes and an hour. A successful installation sequence concludes with the message:
 
 ```
 Successful testing of pixi environment and MODFLOW 6

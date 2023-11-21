@@ -9,7 +9,7 @@ linux = "4.4.0"
 
 [tasks]
 initialize = "export PKG_CONFIG_PATH="
-update-flopy = "pip install https://github.com/modflowpy/flopy/zipball/develop"
+install-flopy = "pip install https://github.com/modflowpy/flopy/zipball/develop"
 clone-modflow6 = "rm -rf modflow6/ && git clone https://github.com/MODFLOW-USGS/modflow6.git"
 setup-modflow6 = "cd modflow6 && meson setup builddir -Ddebug=false -Dparallel=true --prefix=$(pwd) --libdir=bin --wipe"
 install-modflow6 = "cd modflow6 && meson install -C builddir"
@@ -21,6 +21,7 @@ install-triangle = "cd triangle/src/ && gcc triangle.c -O1 -DNO_TIMER -o triangl
 test-triangle = "which triangle"
 install = { depends_on = [
   "initialize",
+  "install-flopy",
   "clone-modflow6",
   "setup-modflow6",
   "install-modflow6",
@@ -70,6 +71,5 @@ imageio = "*"
 pymetis = "*"
 netcdf4 = "*"
 xarray = "*"
-flopy = "*"
 xmipy = "*"
 modflowapi = "*"

@@ -12,7 +12,16 @@ Install a latest version of Ubuntu.
   wsl --install -d Ubuntu-22.04
 ```
 
-You will be asked to provide a username and password.  You'll need to remember this information for some future `sudo` operations. Alternatively, you can install Ubuntu-22.04 from the Microsoft Store.
+You will be asked to provide a username and password. You'll need to remember this information for some future `sudo` operations. 
+
+Alternatively, you can install Ubuntu-22.04 from the Microsoft Store. In that case, you (or your administrator) might need to activate WSL explicitly:
+
+1.	Open Windows 10 Settings app.
+2.	Select Apps.
+3.	Click Programs and Features under the Related settings section on the right.
+4.	Under the Programs and Features page, click Turn Windows features on or off on the left panel.
+5.	Scroll down and enable Windows Subsystem for Linux.
+
 
 ## Clone the class repo
 

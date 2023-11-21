@@ -2,7 +2,7 @@
 
 Instructions are provided here for setting up Ubuntu on the Windows Subsystem for Linux (WSL) to work with MODFLOW.
 
-## Installing WSL
+## 1. Installing WSL
 _Note that you need elevated privileges and sometimes your IT administrator to complete this step_
 
 On a Windows machine it is relatively easy to get parallel MODFLOW compiled and running in a WSL Ubuntu virtual machine.
@@ -23,7 +23,7 @@ Alternatively, you can install Ubuntu-22.04 from the Microsoft Store. In that ca
 5.	Scroll down and enable Windows Subsystem for Linux.
 
 
-## Clone the class repo
+## 2. Clone the class repo
 
 When typing "Ubuntu" in your Windows Search box, the installed version should become visible in the Apps section. Click to start a terminal window.
 
@@ -33,7 +33,7 @@ In the terminal, clone the class repo using the following command:
 git clone https://github.com/mjr-deltares/parallel-modflow-dsd23.git
 ```
 
-## Setting up parallel MODFLOW 6 and pixi environment
+## 3. Setting up parallel MODFLOW 6 and pixi environment
 
 In order to set up parallel MODFLOW 6,  execute:
 
@@ -48,7 +48,7 @@ This will take a bit of time, somewhere in between 15 minutes and an hour. A suc
 Successful testing of pixi environment and MODFLOW 6
 ```
 
-## Jupyter
+## 4. Start Jupyter Lab
 
 Jupyter Lab can be started by executing:
 

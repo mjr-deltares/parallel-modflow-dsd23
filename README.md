@@ -6,7 +6,7 @@ The purpose of this 1-day workshop is to teach participants how to use the new p
 # Getting Started
 Windows Subsystem for Linux (WSL) is a straight forward way for Windows users to get started using the parallel version of MODFLOW. Instructions for setting up WSL and compiling the parallel version of MODFLOW is provided in [wsl_setup.md](./wsl_setup.md).
 
-If you are using the MacOS or Linux operating system you can follow the instructions in [wsl_setup.md](./wsl_setup.md) starting at the [Installing_Miniconda section](./wsl_setup.md#installing-miniconda). 
+If you are using the MacOS or Linux operating system you can follow the instructions in [wsl_setup.md](./wsl_setup.md) starting at the [Clone the class repo](./wsl_setup.md#Clone-the-class-repo).
 
 # Agenda
 * Welcome and Introductions
